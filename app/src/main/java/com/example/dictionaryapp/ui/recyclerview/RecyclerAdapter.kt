@@ -3,13 +3,11 @@ package com.example.dictionaryapp.ui.recyclerview
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.model.data.DataModel
-import java.util.Collections.emptyList
 
 class RecyclerAdapter(
-    private var itemClickCallback: (DataModel) -> Unit
+    private var itemClickCallback: OnListItemClickListener,
+    private var data: List<DataModel>
 ) : RecyclerView.Adapter<ItemRecyclerViewHolder>() {
-
-    private var data: List<DataModel> = emptyList()
 
     fun setData(data: List<DataModel>) {
         this.data = data

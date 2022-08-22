@@ -17,14 +17,13 @@ class ItemRecyclerViewHolder(
         }
     }
 
-    fun bind(itemData: DataModel, listener: (DataModel) -> Unit) {
-
+    fun bind(itemData: DataModel, listener: RecyclerAdapter.OnListItemClickListener) {
         if (layoutPosition != RecyclerView.NO_POSITION) {
             binding.headerTextviewRecyclerItem.text = itemData.text
             binding.descriptionTextviewRecyclerItem.text =
                 itemData.meanings?.get(0)?.translation?.text
             binding.root.setOnClickListener {
-                listener.invoke(itemData)
+                listener.onItemClick(itemData)
             }
         }
     }
