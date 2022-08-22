@@ -51,9 +51,11 @@ class MainPresenterImpl<T : AppState, V : View>(
             override fun onNext(appState: AppState) {
                 currentView?.renderData(appState)
             }
+
             override fun onError(e: Throwable) {
                 currentView?.renderData(AppState.Error(e))
             }
+
             override fun onComplete() {
             }
         }

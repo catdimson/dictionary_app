@@ -3,7 +3,7 @@ package com.example.dictionaryapp.presenter
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.ui.View
 
-interface Presenter<T: AppState, V: View> {
+interface Presenter<T : AppState, V : View> {
 
     fun attachView(view: V)
 

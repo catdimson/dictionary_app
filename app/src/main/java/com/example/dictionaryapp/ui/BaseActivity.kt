@@ -1,12 +1,11 @@
 package com.example.dictionaryapp.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.presenter.Presenter
 
-abstract class BaseActivity<T: AppState> : AppCompatActivity(), View {
+abstract class BaseActivity<T : AppState> : AppCompatActivity(), View {
 
     protected lateinit var presenter: Presenter<T, View>
 

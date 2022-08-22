@@ -18,7 +18,9 @@ class DialogFragment : BottomSheetDialogFragment() {
 
     private val textWatcher = object : TextWatcher {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (binding.searchEditText.text != null && !binding.searchEditText.text.toString().isEmpty()) {
+            if (binding.searchEditText.text != null && !binding.searchEditText.text.toString()
+                    .isEmpty()
+            ) {
                 binding.searchButtonTextview.isEnabled = true
                 binding.clearTextImageview.visibility = View.VISIBLE
             } else {
