@@ -1,4 +1,4 @@
-package com.example.dictionaryapp.presenter
+package com.example.dictionaryapp.model
 
 import io.reactivex.Observable
 

@@ -3,7 +3,7 @@ package com.example.dictionaryapp.model.datasource
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.DataModel
 import com.example.dictionaryapp.model.repository.Repository
-import com.example.dictionaryapp.presenter.Interactor
+import com.example.dictionaryapp.model.Interactor
 import io.reactivex.Observable
 
 class MainInteractor(
