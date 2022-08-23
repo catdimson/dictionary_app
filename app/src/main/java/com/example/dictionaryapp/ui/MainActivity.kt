@@ -4,19 +4,26 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.DataModel
-import com.example.dictionaryapp.presenter.MainPresenterImpl
-import com.example.dictionaryapp.presenter.Presenter
 import com.example.dictionaryapp.ui.recyclerview.RecyclerAdapter
+import com.example.dictionaryapp.viewmodel.BaseViewModel
+import com.example.dictionaryapp.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<AppState>() {
 
     private lateinit var binding: ActivityMainBinding
     private var adapter: RecyclerAdapter? = null
+    override val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+    private val observer = Observer<AppState> { renderData(it) }
     private val onListItemClickListener: RecyclerAdapter.OnListItemClickListener =
         object : RecyclerAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
@@ -28,21 +35,22 @@ class MainActivity : BaseActivity<AppState>() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.getState()?.let {
+            renderData(it)
+        }
+
         binding.searchFab.setOnClickListener {
             val dialogFragment = DialogFragment.newInstance()
             dialogFragment.setOnSearchClickListener(
                 object : DialogFragment.OnSearchClickListener {
                     override fun onClick(searchWord: String) {
-                        presenter.getData(searchWord, true)
+                        viewModel.getData(searchWord, true).observe(this@MainActivity, observer)
                     }
                 }
             )
             dialogFragment.show(supportFragmentManager, "bottomSheetFragment")
         }
-    }
-
-    override fun createPresenter(): Presenter<AppState, View> {
-        return MainPresenterImpl()
     }
 
     override fun renderData(appState: AppState) {
@@ -84,7 +92,7 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.getData("hi", true)
+            viewModel.getData("hi", true).observe(this, observer)
         }
     }
 

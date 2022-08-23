@@ -18,13 +18,15 @@ class MainViewModel(
 ) : BaseViewModel<AppState>() {
     private var appState: AppState? = null
 
+    fun getState(): AppState? = appState
+
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(
             interactor.getData(word, isOnline)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
-                    liveDataForViewToObserve.value = AppState.Loading(null)
+                    liveData.value = AppState.Loading(null)
                 }
                 .subscribeWith(getObserver())
         )
@@ -36,11 +38,11 @@ class MainViewModel(
 
             override fun onNext(state: AppState) {
                 appState = state
-                liveDataForViewToObserve.value = state
+                liveData.value = state
             }
 
             override fun onError(e: Throwable) {
-                liveDataForViewToObserve.value = AppState.Error(e)
+                liveData.value = AppState.Error(e)
             }
 
             override fun onComplete() {
