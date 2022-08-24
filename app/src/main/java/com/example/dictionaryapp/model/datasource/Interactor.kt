@@ -1,4 +1,4 @@
-package com.example.dictionaryapp.model
+package com.example.dictionaryapp.model.datasource
 
 import io.reactivex.Observable
 

@@ -2,23 +2,22 @@ package com.example.dictionaryapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.example.dictionaryapp.model.data.AppState
-import com.example.dictionaryapp.model.datasource.DataSourceLocalImpl
-import com.example.dictionaryapp.model.datasource.DataSourceRemoteImpl
 import com.example.dictionaryapp.model.datasource.MainInteractor
-import com.example.dictionaryapp.model.repository.RepositoryImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class MainViewModel(
-    private val interactor: MainInteractor = MainInteractor(
-        RepositoryImpl(DataSourceRemoteImpl()),
-        RepositoryImpl(DataSourceLocalImpl())
-    )
+class MainViewModel @Inject constructor(
+    private val interactor: MainInteractor
 ) : BaseViewModel<AppState>() {
     private var appState: AppState? = null
 
     fun getState(): AppState? = appState
+
+    fun subscribe(): LiveData<AppState> {
+        return liveData
+    }
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(

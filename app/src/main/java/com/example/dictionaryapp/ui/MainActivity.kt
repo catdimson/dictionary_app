@@ -6,23 +6,23 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.DataModel
 import com.example.dictionaryapp.ui.recyclerview.RecyclerAdapter
-import com.example.dictionaryapp.viewmodel.BaseViewModel
 import com.example.dictionaryapp.viewmodel.MainViewModel
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 class MainActivity : BaseActivity<AppState>() {
 
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    override lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
     private var adapter: RecyclerAdapter? = null
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
     private val observer = Observer<AppState> { renderData(it) }
     private val onListItemClickListener: RecyclerAdapter.OnListItemClickListener =
         object : RecyclerAdapter.OnListItemClickListener {
@@ -35,6 +35,10 @@ class MainActivity : BaseActivity<AppState>() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AndroidInjection.inject(this)
+
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         viewModel.getState()?.let {
             renderData(it)
