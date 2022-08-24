@@ -1,12 +1,12 @@
 package com.example.dictionaryapp.model.datasource
 
 import com.example.dictionaryapp.model.data.DataModel
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImpl : DataSource<List<DataModel>> {
@@ -23,7 +23,7 @@ class RetrofitImpl : DataSource<List<DataModel>> {
         return Retrofit.Builder()
             .baseUrl(BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(createOkHttpClient(interceptor))
             .build()
     }

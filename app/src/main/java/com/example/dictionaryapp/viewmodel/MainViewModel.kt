@@ -6,18 +6,13 @@ import com.example.dictionaryapp.model.datasource.MainInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val interactor: MainInteractor
 ) : BaseViewModel<AppState>() {
     private var appState: AppState? = null
 
     fun getState(): AppState? = appState
-
-    fun subscribe(): LiveData<AppState> {
-        return liveData
-    }
 
     override fun getData(word: String, isOnline: Boolean): LiveData<AppState> {
         compositeDisposable.add(
