@@ -2,13 +2,13 @@ package com.example.dictionaryapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import com.example.dictionaryapp.model.data.AppState
-import com.example.dictionaryapp.model.datasource.MainInteractor
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
+import com.example.dictionaryapp.model.datasource.Interactor
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.observers.DisposableObserver
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainViewModel(
-    private val interactor: MainInteractor
+    private val interactor: Interactor<AppState>
 ) : BaseViewModel<AppState>() {
     private var appState: AppState? = null
 
