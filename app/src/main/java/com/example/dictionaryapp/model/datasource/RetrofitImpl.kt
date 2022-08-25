@@ -1,7 +1,7 @@
 package com.example.dictionaryapp.model.datasource
 
 import com.example.dictionaryapp.model.data.DataModel
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
