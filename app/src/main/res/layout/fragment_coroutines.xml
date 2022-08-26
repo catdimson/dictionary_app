@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="8dp"
+            android:layout_margin="8dp"
             android:textSize="12sp"
             android:text="@string/three_sec_text"
             android:layout_height="wrap_content" />
@@ -33,6 +34,43 @@
         <TextView
             android:id="@+id/three_sec_button_result"
             android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/stopwatch_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:layout_margin="8dp"
+            android:text="@string/stopwatch_text"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/stop_stopwatch_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:textSize="12sp"
+            android:text="@string/stop_text"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/stopwatch_button_result"
+            android:text="0"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:padding="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />

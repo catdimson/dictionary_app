@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.dictionaryapp.databinding.FragmentCoroutinesBinding
 import kotlinx.coroutines.*
@@ -30,6 +31,7 @@ class CoroutinesFragment : Fragment() {
 
     private fun initListeners() {
         await3secListener()
+        stopwatchListener()
     }
 
     // 1 По клику ждем 3 сек и появляется сообщение об этом в textview
@@ -50,5 +52,35 @@ class CoroutinesFragment : Fragment() {
 
     private suspend fun await3Sec() {
         delay(3_000)
+    }
+
+    // 2 Имитация секундомера. Можно сбрасывать.
+    private fun stopwatchListener() {
+        val scope = CoroutineScope(Dispatchers.IO)
+        var jobStopwatch: Job? = null
+        binding.stopwatchButton.setOnClickListener {
+            binding.stopwatchButtonResult.text = 0.toString()
+            jobStopwatch?.cancel()
+            jobStopwatch = scope.launch {
+                var timer = 0
+                while(true) {
+                    delay(1_000)
+                    withContext(Dispatchers.Main) {
+                        timer++
+                        binding.stopwatchButtonResult.text = timer.toString()
+                    }
+                }
+            }
+        }
+        binding.stopStopwatchButton.setOnClickListener {
+            scope.launch {
+                stopStopwatch(jobStopwatch!!, binding.stopwatchButtonResult)
+            }
+        }
+    }
+
+    private fun stopStopwatch(stopwatchJob: Job, view: TextView) {
+        stopwatchJob.cancel()
+        view.text = 0.toString()
     }
 }
