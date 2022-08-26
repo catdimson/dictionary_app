@@ -52,6 +52,7 @@ class MainActivity : BaseActivity<AppState>() {
         binding.coroutinesFragmentButton.setOnClickListener {
             val coroutinesFragment = CoroutinesFragment.newInstance()
             binding.coroutinesFragmentButton.isVisible = false
+            binding.searchFab.isVisible = false
             supportFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)

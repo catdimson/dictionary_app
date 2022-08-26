@@ -13,4 +13,5 @@
     <string name="world_button_text">Рассчитать вселенную</string>
     <string name="coroutines_example">Примеры работы с корутинами</string>
     <string name="stop_text">Стоп секундомер</string>
+    <string name="calculate_text">Рассчитать</string>
 </resources>

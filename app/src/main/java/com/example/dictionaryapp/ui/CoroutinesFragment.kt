@@ -32,6 +32,7 @@ class CoroutinesFragment : Fragment() {
     private fun initListeners() {
         await3secListener()
         stopwatchListener()
+        sumNumbersListener()
     }
 
     // 1 По клику ждем 3 сек и появляется сообщение об этом в textview
@@ -82,5 +83,32 @@ class CoroutinesFragment : Fragment() {
     private fun stopStopwatch(stopwatchJob: Job, view: TextView) {
         stopwatchJob.cancel()
         view.text = 0.toString()
+
+    }
+
+    // 3 Рассчитать сумму значений через async await
+    private fun sumNumbersListener() {
+        val scope = CoroutineScope(Dispatchers.IO)
+        var jobSumNums: Deferred<Long>? = null
+        binding.calculateButton.setOnClickListener {
+            binding.calculateResult.text = 0.toString()
+            jobSumNums?.cancel()
+
+            jobSumNums = scope.async {
+                withContext(Dispatchers.Main) {
+                    val num1 = binding.calculateNum1.text.toString().toLong()
+                    val num2 = binding.calculateNum2.text.toString().toLong()
+                    delay(num1 * 1000 + num2 * 1000)
+                    num1 + num2
+                }
+            }
+
+            scope.launch {
+                withContext(Dispatchers.Main) {
+                    val sum = jobSumNums?.await().toString()
+                    binding.calculateResult.text = sum
+                }
+            }
+        }
     }
 }

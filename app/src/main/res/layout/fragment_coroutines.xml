@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="26sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/color_black"
         android:text="@string/coroutines_example"
@@ -25,16 +25,16 @@
             android:id="@+id/three_sec_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="4dp"
             android:layout_margin="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="@string/three_sec_text"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/three_sec_button_result"
             android:layout_width="0dp"
-            android:padding="8dp"
+            android:padding="4dp"
             android:layout_margin="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -50,8 +50,8 @@
             android:id="@+id/stopwatch_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            android:textSize="12sp"
+            android:padding="4dp"
+            android:textSize="10sp"
             android:layout_margin="8dp"
             android:text="@string/stopwatch_text"
             android:layout_height="wrap_content" />
@@ -60,9 +60,9 @@
             android:id="@+id/stop_stopwatch_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="4dp"
             android:layout_margin="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:text="@string/stop_text"
             android:layout_height="wrap_content" />
 
@@ -71,7 +71,7 @@
             android:text="0"
             android:layout_width="0dp"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
@@ -79,32 +79,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
-            android:id="@+id/world_button"
+            android:id="@+id/calculate_button"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            android:textSize="12sp"
-            android:text="@string/world_button_text"
+            android:padding="4dp"
+            android:textSize="10sp"
+            android:layout_margin="8dp"
+            android:text="@string/calculate_text"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/factorial_edit_text"
+            android:id="@+id/calculate_num1"
             android:layout_width="0dp"
-            android:padding="8dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/calculate_num2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/factorial_text_view_result"
+            android:id="@+id/calculate_result"
+            android:text="0"
             android:layout_width="0dp"
-            android:padding="8dp"
+            android:gravity="center"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
-
     </LinearLayout>
 
 </LinearLayout>
