@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dictionaryapp.R
@@ -46,6 +47,16 @@ class MainActivity : BaseActivity<AppState>() {
                 }
             )
             dialogFragment.show(supportFragmentManager, "bottomSheetFragment")
+        }
+
+        binding.coroutinesFragmentButton.setOnClickListener {
+            val coroutinesFragment = CoroutinesFragment.newInstance()
+            binding.coroutinesFragmentButton.isVisible = false
+            supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(binding.successLinearLayout.id, coroutinesFragment)
+                .commit()
         }
     }
 

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/color_black"
+        android:text="@string/coroutines_example"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/three_sec_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:text="@string/three_sec_text"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/three_sec_button_result"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/world_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:text="@string/world_button_text"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/factorial_edit_text"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/factorial_text_view_result"
+            android:layout_width="0dp"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
