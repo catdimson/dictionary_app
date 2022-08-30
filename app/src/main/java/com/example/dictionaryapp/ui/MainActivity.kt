@@ -11,7 +11,7 @@ import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.entity.DataModel
-import com.example.dictionaryapp.ui.recyclerview.RecyclerAdapter
+import com.example.dictionaryapp.ui.recyclerview.main.RecyclerAdapter
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

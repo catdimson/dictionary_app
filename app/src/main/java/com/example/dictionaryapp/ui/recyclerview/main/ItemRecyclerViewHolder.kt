@@ -1,4 +1,4 @@
-package com.example.dictionaryapp.ui.recyclerview
+package com.example.dictionaryapp.ui.recyclerview.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

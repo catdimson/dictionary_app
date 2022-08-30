@@ -1,5 +1,10 @@
 package com.example.dictionaryapp.util
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import androidx.appcompat.app.AlertDialog
+import com.example.dictionaryapp.R
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.data.entity.HistoryEntity
@@ -99,4 +104,30 @@ fun convertMeaningsToString(meanings: List<Meaning>): String {
         }
     }
     return meaningsSeparatedByComma
+}
+
+fun isOnline(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val netInfo: NetworkInfo?
+    netInfo = connectivityManager.activeNetworkInfo
+    return netInfo != null && netInfo.isConnected
+}
+
+fun getStubAlertDialog(context: Context): AlertDialog {
+    return getAlertDialog(context, null, null)
+}
+
+fun getAlertDialog(context: Context, title: String?, message: String?): AlertDialog {
+    val builder = AlertDialog.Builder(context)
+    var finalTitle: String? = context.getString(R.string.dialog_title_stub)
+    if (!title.isNullOrBlank()) {
+        finalTitle = title
+    }
+    builder.setTitle(finalTitle)
+    if (!message.isNullOrBlank()) {
+        builder.setMessage(message)
+    }
+    builder.setCancelable(true)
+    builder.setPositiveButton(R.string.dialog_button_cancel) { dialog, _ -> dialog.dismiss() }
+    return builder.create()
 }
