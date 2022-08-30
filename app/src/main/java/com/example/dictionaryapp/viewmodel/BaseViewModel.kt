@@ -1,18 +1,33 @@
 package com.example.dictionaryapp.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dictionaryapp.model.data.AppState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 
 abstract class BaseViewModel<T : AppState>(
-    protected val liveData: MutableLiveData<T> = MutableLiveData(),
+    protected open val liveData: MutableLiveData<T> = MutableLiveData(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ViewModel() {
-    open fun getData(word: String, isOnline: Boolean): LiveData<T> = liveData
+
+    abstract fun getData(word: String, isOnline: Boolean)
+
+    protected val viewModelCoroutineScope = CoroutineScope(
+        Dispatchers.Main
+                + SupervisorJob()
+                + CoroutineExceptionHandler { _, throwable ->
+            handleError(throwable)
+        })
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        super.onCleared()
+        cancelJob()
     }
+
+    protected fun cancelJob() {
+        viewModelCoroutineScope.coroutineContext.cancelChildren()
+    }
+
+    abstract fun handleError(error: Throwable)
 }
