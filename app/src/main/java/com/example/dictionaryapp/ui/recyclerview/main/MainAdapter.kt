@@ -4,21 +4,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.model.data.entity.DataModel
 
-class RecyclerAdapter(
+class MainAdapter(
     private var itemClickCallback: OnListItemClickListener,
     private var data: List<DataModel>
-) : RecyclerView.Adapter<ItemRecyclerViewHolder>() {
+) : RecyclerView.Adapter<MainItemRecyclerViewHolder>() {
 
     fun setData(data: List<DataModel>) {
         this.data = data
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
-        return ItemRecyclerViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainItemRecyclerViewHolder {
+        return MainItemRecyclerViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainItemRecyclerViewHolder, position: Int) {
         holder.bind(getItem(position), itemClickCallback)
     }
 

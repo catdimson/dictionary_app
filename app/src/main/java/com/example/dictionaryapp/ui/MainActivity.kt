@@ -11,7 +11,7 @@ import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.entity.DataModel
-import com.example.dictionaryapp.ui.recyclerview.main.RecyclerAdapter
+import com.example.dictionaryapp.ui.recyclerview.main.MainAdapter
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,10 +19,10 @@ class MainActivity : BaseActivity<AppState>() {
 
     override val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
-    private var adapter: RecyclerAdapter? = null
+    private var adapter: MainAdapter? = null
     private val observer = Observer<AppState> { renderData(it) }
-    private val onListItemClickListener: RecyclerAdapter.OnListItemClickListener =
-        object : RecyclerAdapter.OnListItemClickListener {
+    private val onListItemClickListener: MainAdapter.OnListItemClickListener =
+        object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
@@ -73,7 +73,7 @@ class MainActivity : BaseActivity<AppState>() {
                         binding.mainActivityRecyclerview.layoutManager =
                             LinearLayoutManager(applicationContext)
                         binding.mainActivityRecyclerview.adapter =
-                            RecyclerAdapter(onListItemClickListener, dataModel)
+                            MainAdapter(onListItemClickListener, dataModel)
                     } else {
                         adapter!!.setData(dataModel)
                     }
