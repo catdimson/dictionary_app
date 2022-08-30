@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitImpl : DataSource<List<DataModel>> {
 
-    override fun getData(word: String): Observable<List<DataModel>> {
+    override suspend fun getData(word: String): List<DataModel> {
         return getService(BaseInterceptor.interceptor).search(word)
     }
 
