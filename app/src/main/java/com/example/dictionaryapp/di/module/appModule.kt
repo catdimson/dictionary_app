@@ -46,12 +46,19 @@ val appModule = module {
         )
     }
     single<DataSource<List<DataModel>>>(named(DATA_SOURCE_LOCAL)) {
-        DataSourceLocalImpl(
+        DataSourceRoomImpl(
             localProvider = get()
         )
     }
     single { RoomDataBaseImpl() }
     single { RetrofitImpl() }
+}
 
+val mainScreen = module {
     viewModel { MainViewModel(interactor = get()) }
 }
+
+val historyScreen = module {
+
+}
+
