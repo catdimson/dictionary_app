@@ -3,8 +3,7 @@ package com.example.dictionaryapp.model.datasource
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.DataModel
 import com.example.dictionaryapp.model.repository.Repository
-import com.example.dictionaryapp.presenter.Interactor
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 class MainInteractor(
     private val remoteRepository: Repository<List<DataModel>>,
