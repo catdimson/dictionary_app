@@ -1,12 +1,13 @@
 package com.example.dictionaryapp.model.datasource
 
 import com.example.dictionaryapp.model.data.DataModel
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
-class DataSourceLocalImpl : DataSource<List<DataModel>> {
-    private val remoteProvider: RoomDataBaseImpl = RoomDataBaseImpl()
+class DataSourceLocalImpl(
+    private val localProvider: RoomDataBaseImpl
+) : DataSource<List<DataModel>> {
 
     override fun getData(word: String): Observable<List<DataModel>> {
-        return remoteProvider.getData(word)
+        return localProvider.getData(word)
     }
 }

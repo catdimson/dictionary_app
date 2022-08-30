@@ -1,6 +1,6 @@
 package com.example.dictionaryapp.model.datasource
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 interface DataSource<T> {
 

@@ -7,4 +7,11 @@
     <string name="button_search">Search</string>
     <string name="search_hint">New word</string>
     <string name="delete_description">X</string>
+    <string name="using_coroutines_example">Примеры с корутинами</string>
+    <string name="three_sec_text">Работа 3 сек</string>
+    <string name="stopwatch_text">Старт секундомер</string>
+    <string name="world_button_text">Рассчитать вселенную</string>
+    <string name="coroutines_example">Примеры работы с корутинами</string>
+    <string name="stop_text">Стоп секундомер</string>
+    <string name="calculate_text">Рассчитать</string>
 </resources>

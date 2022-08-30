@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
@@ -13,14 +13,11 @@ import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.DataModel
 import com.example.dictionaryapp.ui.recyclerview.RecyclerAdapter
 import com.example.dictionaryapp.viewmodel.MainViewModel
-import dagger.android.AndroidInjection
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<AppState>() {
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    override lateinit var viewModel: MainViewModel
+    override val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private var adapter: RecyclerAdapter? = null
     private val observer = Observer<AppState> { renderData(it) }
@@ -36,10 +33,6 @@ class MainActivity : BaseActivity<AppState>() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AndroidInjection.inject(this)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-
         viewModel.getState()?.let {
             renderData(it)
         }
@@ -54,6 +47,17 @@ class MainActivity : BaseActivity<AppState>() {
                 }
             )
             dialogFragment.show(supportFragmentManager, "bottomSheetFragment")
+        }
+
+        binding.coroutinesFragmentButton.setOnClickListener {
+            val coroutinesFragment = CoroutinesFragment.newInstance()
+            binding.coroutinesFragmentButton.isVisible = false
+            binding.searchFab.isVisible = false
+            supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(binding.successLinearLayout.id, coroutinesFragment)
+                .commit()
         }
     }
 
