@@ -1,5 +1,7 @@
 package com.example.dictionaryapp.model.data
 
+import com.example.dictionaryapp.model.data.entity.DataModel
+
 sealed class AppState {
 
     data class Success(val data: List<DataModel>?) : AppState()

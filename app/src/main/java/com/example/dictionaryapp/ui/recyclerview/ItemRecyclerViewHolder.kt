@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.databinding.ItemRecyclerViewBinding
-import com.example.dictionaryapp.model.data.DataModel
+import com.example.dictionaryapp.model.data.entity.DataModel
 
 class ItemRecyclerViewHolder(
     private val binding: ItemRecyclerViewBinding

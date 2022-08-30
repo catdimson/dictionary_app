@@ -1,6 +1,6 @@
 package com.example.dictionaryapp.model.datasource
 
-import com.example.dictionaryapp.model.data.DataModel
+import com.example.dictionaryapp.model.data.entity.DataModel
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

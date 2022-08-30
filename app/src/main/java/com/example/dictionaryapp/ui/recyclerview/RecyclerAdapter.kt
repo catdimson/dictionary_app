@@ -2,7 +2,7 @@ package com.example.dictionaryapp.ui.recyclerview
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dictionaryapp.model.data.DataModel
+import com.example.dictionaryapp.model.data.entity.DataModel
 
 class RecyclerAdapter(
     private var itemClickCallback: OnListItemClickListener,

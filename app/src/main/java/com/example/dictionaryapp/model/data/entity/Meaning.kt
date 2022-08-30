@@ -1,4 +1,4 @@
-package com.example.dictionaryapp.model.data
+package com.example.dictionaryapp.model.data.entity
 
 data class Meaning(
     val translation: Translation?,

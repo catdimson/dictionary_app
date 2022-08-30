@@ -1,6 +1,6 @@
 package com.example.dictionaryapp.model.repository
 
-import com.example.dictionaryapp.model.data.DataModel
+import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.datasource.DataSource
 import io.reactivex.rxjava3.core.Observable
 
