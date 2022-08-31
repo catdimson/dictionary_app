@@ -3,8 +3,8 @@ package com.example.dictionaryapp.ui
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialogFragment
-import com.example.dictionaryapp.util.getAlertDialog
-import com.example.dictionaryapp.util.getStubAlertDialog
+import com.example.utils.getAlertDialog
+import com.example.utils.getStubAlertDialog
 
 class AlertDialogFragment : AppCompatDialogFragment() {
 

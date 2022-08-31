@@ -13,8 +13,8 @@ import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.datasource.MainInteractor
 import com.example.dictionaryapp.ui.recyclerview.main.MainAdapter
 import com.example.dictionaryapp.util.convertMeaningsToString
-import com.example.dictionaryapp.util.isOnline
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
+import com.example.utils.isOnline
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"

@@ -45,6 +45,8 @@ android {
 }
 
 dependencies {
+    // Custom Utils
+    implementation(project(":utils"))
 
     // Retrofit 2
     implementation(Retrofit.retrofit)
