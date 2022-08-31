@@ -3,12 +3,10 @@ package com.example.dictionaryapp.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dictionaryapp.model.data.AppState
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel<T : AppState>(
-    protected open val liveData: MutableLiveData<T> = MutableLiveData(),
-    protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    protected open val liveData: MutableLiveData<T> = MutableLiveData()
 ) : ViewModel() {
 
     abstract fun getData(word: String, isOnline: Boolean)

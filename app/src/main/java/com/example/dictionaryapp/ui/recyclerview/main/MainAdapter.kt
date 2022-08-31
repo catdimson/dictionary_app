@@ -5,9 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.model.data.entity.DataModel
 
 class MainAdapter(
-    private var itemClickCallback: OnListItemClickListener,
-    private var data: List<DataModel>
+    private var itemClickCallback: OnListItemClickListener
 ) : RecyclerView.Adapter<MainItemRecyclerViewHolder>() {
+
+    private var data: List<DataModel> = arrayListOf()
 
     fun setData(data: List<DataModel>) {
         this.data = data

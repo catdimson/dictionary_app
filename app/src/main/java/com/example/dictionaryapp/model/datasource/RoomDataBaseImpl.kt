@@ -4,7 +4,6 @@ import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.data.entity.HistoryEntity
 import com.example.dictionaryapp.model.datasource.dao.HistoryDao
-import io.reactivex.rxjava3.core.Observable
 
 class RoomDataBaseImpl(
     private val historyDao: HistoryDao

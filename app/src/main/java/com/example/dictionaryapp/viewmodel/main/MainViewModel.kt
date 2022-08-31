@@ -2,18 +2,15 @@ package com.example.dictionaryapp.viewmodel.main
 
 import androidx.lifecycle.LiveData
 import com.example.dictionaryapp.model.data.AppState
-import com.example.dictionaryapp.model.datasource.Interactor
+import com.example.dictionaryapp.model.datasource.MainInteractor
 import com.example.dictionaryapp.util.parseOnlineSearchResults
 import com.example.dictionaryapp.viewmodel.BaseViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.observers.DisposableObserver
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(
-    private val interactor: Interactor<AppState>
+    private val interactor: MainInteractor
 ) : BaseViewModel<AppState>() {
 
     private val liveDataForViewToObserve: LiveData<AppState> = liveData
@@ -30,16 +27,17 @@ class MainViewModel(
         }
     }
 
-    private suspend fun startInteractor(word: String, isOnline: Boolean) = withContext(Dispatchers.IO) {
-        liveData.postValue(parseOnlineSearchResults(interactor.getData(word, isOnline)))
-    }
+    private suspend fun startInteractor(word: String, isOnline: Boolean) =
+        withContext(Dispatchers.IO) {
+            liveData.postValue(parseOnlineSearchResults(interactor.getData(word, isOnline)))
+        }
 
     override fun handleError(error: Throwable) {
         liveData.postValue(AppState.Error(error))
     }
 
     override fun onCleared() {
-        liveData.value = AppState.Success(null)//TODO Workaround. Set View to original state
+        liveData.value = AppState.Success(null)
         super.onCleared()
     }
 }

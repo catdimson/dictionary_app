@@ -131,3 +131,5 @@ fun getAlertDialog(context: Context, title: String?, message: String?): AlertDia
     builder.setPositiveButton(R.string.dialog_button_cancel) { dialog, _ -> dialog.dismiss() }
     return builder.create()
 }
+
+fun String.Companion.getEmptyString(): String = ""
