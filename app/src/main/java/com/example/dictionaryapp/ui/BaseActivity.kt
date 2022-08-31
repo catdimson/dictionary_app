@@ -12,7 +12,7 @@ import com.example.dictionaryapp.model.datasource.Interactor
 import com.example.dictionaryapp.viewmodel.BaseViewModel
 import com.example.utils.isOnline
 
-private const val DIALOG_FRAGMENT_TAG = "dialog_fragment_tag"
+private const val DIALOG_FRAGMENT_TAG = "DIALOG_FRAGMENT_TAG"
 
 abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity() {
 
