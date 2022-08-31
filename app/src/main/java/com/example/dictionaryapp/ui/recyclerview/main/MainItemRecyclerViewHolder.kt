@@ -1,23 +1,23 @@
-package com.example.dictionaryapp.ui.recyclerview
+package com.example.dictionaryapp.ui.recyclerview.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.databinding.ItemRecyclerViewBinding
-import com.example.dictionaryapp.model.data.DataModel
+import com.example.dictionaryapp.model.data.entity.DataModel
 
-class ItemRecyclerViewHolder(
+class MainItemRecyclerViewHolder(
     private val binding: ItemRecyclerViewBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
-        fun create(parent: ViewGroup): ItemRecyclerViewHolder {
+        fun create(parent: ViewGroup): MainItemRecyclerViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            return ItemRecyclerViewHolder(ItemRecyclerViewBinding.inflate(inflater))
+            return MainItemRecyclerViewHolder(ItemRecyclerViewBinding.inflate(inflater))
         }
     }
 
-    fun bind(itemData: DataModel, listener: RecyclerAdapter.OnListItemClickListener) {
+    fun bind(itemData: DataModel, listener: MainAdapter.OnListItemClickListener) {
         if (layoutPosition != RecyclerView.NO_POSITION) {
             binding.headerTextviewRecyclerItem.text = itemData.text
             binding.descriptionTextviewRecyclerItem.text =

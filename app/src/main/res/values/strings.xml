@@ -14,4 +14,15 @@
     <string name="coroutines_example">Примеры работы с корутинами</string>
     <string name="stop_text">Стоп секундомер</string>
     <string name="calculate_text">Рассчитать</string>
+
+    <string name="error_stub">Error</string>
+    <string name="image_stub">image</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_title_stub">Undefined error</string>
+    <string name="dialog_title_device_is_offline">No internet connection</string>
+    <string name="dialog_message_device_is_offline">You can not use app without internet connection. Please, check
+        internet connection.
+    </string>
+    <string name="dialog_tittle_sorry">Sorry</string>
+    <string name="menu_title_history">History</string>
 </resources>
