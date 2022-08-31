@@ -1,19 +1,31 @@
 package com.example.dictionaryapp.ui.recyclerview.history
 
-import android.view.View
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dictionaryapp.R
+import com.example.dictionaryapp.databinding.ActivityHistoryRecyclerviewItemBinding
 import com.example.dictionaryapp.model.data.entity.DataModel
 
-class RecyclerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class HistoryItemRecyclerViewHolder(
+    private val binding: ActivityHistoryRecyclerviewItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
+
+    companion object {
+        fun create(parent: ViewGroup): HistoryItemRecyclerViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            return HistoryItemRecyclerViewHolder(
+                ActivityHistoryRecyclerviewItemBinding.inflate(
+                    inflater
+                )
+            )
+        }
+    }
 
     fun bind(data: DataModel) {
         if (layoutPosition != RecyclerView.NO_POSITION) {
-            itemView.findViewById<TextView>(R.id.header_history_textview_recycler_item).text =
-                data.text
-            itemView.setOnClickListener {
+            binding.headerHistoryTextviewRecyclerItem.text = data.text
+            binding.root.setOnClickListener {
                 Toast.makeText(itemView.context, "on click: ${data.text}", Toast.LENGTH_SHORT)
                     .show()
             }
