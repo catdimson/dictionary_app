@@ -34,7 +34,7 @@ class RoomDataBaseImpl(
     }
 
     private fun mapHistoryEntityToSearchResult(list: List<HistoryEntity>): List<DataModel> {
-        val dataModel= ArrayList<DataModel>()
+        val dataModel = ArrayList<DataModel>()
         if (list.isNotEmpty()) {
             for (entity in list) {
                 dataModel.add(DataModel(entity.word, null))

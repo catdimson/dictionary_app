@@ -61,7 +61,13 @@ private fun parseOnlineResult(
             if (meaning.translation != null &&
                 !meaning.translation.text.isNullOrBlank()
             ) {
-                newMeanings.add(Meaning(meaning.translation, meaning.imageUrl, meaning.transcription))
+                newMeanings.add(
+                    Meaning(
+                        meaning.translation,
+                        meaning.imageUrl,
+                        meaning.transcription
+                    )
+                )
             }
         }
         if (newMeanings.isNotEmpty()) {
@@ -107,7 +113,8 @@ fun convertMeaningsToString(meanings: List<Meaning>): String {
 }
 
 fun isOnline(context: Context): Boolean {
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val netInfo: NetworkInfo?
     netInfo = connectivityManager.activeNetworkInfo
     return netInfo != null && netInfo.isConnected
