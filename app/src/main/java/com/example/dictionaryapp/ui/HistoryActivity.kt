@@ -7,12 +7,20 @@ import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.datasource.HistoryInteractor
 import com.example.dictionaryapp.ui.recyclerview.history.HistoryAdapter
 import com.example.dictionaryapp.viewmodel.history.HistoryViewModel
+import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
+import org.koin.core.scope.get
+
 
 class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
 
     private lateinit var binding: ActivityHistoryBinding
     override lateinit var model: HistoryViewModel
+    private val scope by lazy { getKoin().getOrCreateScope("historyScope", named("historyScope")) }
     private val adapter: HistoryAdapter by lazy { HistoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +45,7 @@ class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
         if (binding.historyActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: HistoryViewModel by viewModel()
+        val viewModel = scope.get<HistoryViewModel>()
         model = viewModel
         model.subscribe().observe(this@HistoryActivity) { renderData(it) }
     }
