@@ -39,6 +39,7 @@ private object DependenciesVersion {
     const val coil = "0.11.0"
 
     // General
+    const val splashScreen = "1.0.0-alpha01"
     const val roomCompiler = "2.4.3"
     const val lifecycleViewmodel = "2.5.1"
     const val lifecycleViewmodelKtx = "2.5.1"
@@ -85,6 +86,7 @@ object Coil {
 }
 
 object General {
+    const val splashScreen = "androidx.core:core-splashscreen:${DependenciesVersion.splashScreen}"
     const val roomCompiler = "androidx.room:room-compiler:${DependenciesVersion.roomCompiler}"
     const val lifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:${DependenciesVersion.lifecycleViewmodel}"
     const val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${DependenciesVersion.lifecycleViewmodelKtx}"
