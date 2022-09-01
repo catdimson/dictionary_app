@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
@@ -15,6 +16,8 @@ import com.example.dictionaryapp.util.convertMeaningsToString
 import com.example.dictionaryapp.viewmodel.history.HistoryViewModel
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
 import com.example.utils.isOnline
+import com.example.utils.viewById
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +32,8 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private val scope by lazy { getKoin().getOrCreateScope("mainScope", named("mainScope")) }
+    private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
+    private val searchFAB by viewById<FloatingActionButton>(R.id.search_fab)
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -98,7 +103,12 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     }
 
     private fun initViews() {
-        binding.searchFab.setOnClickListener(fabClickListener)
-        binding.mainActivityRecyclerview.adapter = adapter
+        searchFAB.setOnClickListener(fabClickListener)
+        mainActivityRecyclerview.adapter = adapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.close()
     }
 }
