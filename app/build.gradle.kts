@@ -73,6 +73,7 @@ dependencies {
     implementation(Coil.coil)
 
     // General
+    implementation(General.splashScreen)
     kapt(General.roomCompiler)
     implementation(General.lifecycleViewmodel)
     implementation(General.lifecycleViewmodelKtx)

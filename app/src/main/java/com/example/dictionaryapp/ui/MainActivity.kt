@@ -1,10 +1,17 @@
 package com.example.dictionaryapp.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import androidx.annotation.RequiresApi
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
@@ -19,6 +26,7 @@ import com.example.utils.viewById
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
+import java.util.concurrent.Executors
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
@@ -26,6 +34,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
+    private lateinit var splashScreen: SplashScreen
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private val scope by lazy { getKoin().getOrCreateScope("mainScope", named("mainScope")) }
     private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
@@ -61,10 +70,17 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
             }
         }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        stopSplashScreen()
+        customizeSplashScreen()
 
         iniViewModel()
         initViews()
@@ -106,5 +122,37 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     override fun onDestroy() {
         super.onDestroy()
         scope.close()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun runSplashScreen() {
+        splashScreen = installSplashScreen()
+        splashScreen.setKeepVisibleCondition { true }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun stopSplashScreen() {
+        Executors.newSingleThreadExecutor().execute {
+            Thread.sleep(2_000)
+            splashScreen.setKeepVisibleCondition { false }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun customizeSplashScreen() {
+        splashScreen.setOnExitAnimationListener { splashScreenProvider ->
+            ObjectAnimator.ofFloat(
+                splashScreenProvider.view,
+                View.TRANSLATION_Y,
+                0f,
+                -splashScreenProvider.view.height.toFloat()
+            ).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+                doOnEnd {
+                    splashScreenProvider.remove()
+                }
+            }.start()
+        }
     }
 }
