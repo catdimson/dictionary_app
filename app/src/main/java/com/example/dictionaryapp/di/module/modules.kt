@@ -11,12 +11,8 @@ import com.example.dictionaryapp.model.repository.Repository
 import com.example.dictionaryapp.model.repository.RepositoryImpl
 import com.example.dictionaryapp.model.repository.RepositoryLocal
 import com.example.dictionaryapp.model.repository.RepositoryLocalImpl
-import com.example.dictionaryapp.ui.DescriptionActivity
-import com.example.dictionaryapp.ui.HistoryActivity
-import com.example.dictionaryapp.ui.MainActivity
 import com.example.dictionaryapp.viewmodel.history.HistoryViewModel
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

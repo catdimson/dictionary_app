@@ -10,14 +10,8 @@ import com.example.dictionaryapp.model.datasource.HistoryInteractor
 import com.example.dictionaryapp.ui.recyclerview.history.HistoryAdapter
 import com.example.dictionaryapp.viewmodel.history.HistoryViewModel
 import com.example.utils.viewById
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.getKoin
-import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.currentScope
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.named
-import org.koin.core.scope.Scope
-import org.koin.core.scope.get
 
 
 class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
