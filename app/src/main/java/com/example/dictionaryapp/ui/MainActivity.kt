@@ -1,12 +1,15 @@
 package com.example.dictionaryapp.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import androidx.annotation.RequiresApi
+import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.RecyclerView
@@ -70,10 +73,14 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         runSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         stopSplashScreen()
+        customizeSplashScreen()
 
         iniViewModel()
         initViews()
@@ -128,6 +135,24 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         Executors.newSingleThreadExecutor().execute {
             Thread.sleep(2_000)
             splashScreen.setKeepVisibleCondition { false }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun customizeSplashScreen() {
+        splashScreen.setOnExitAnimationListener { splashScreenProvider ->
+            ObjectAnimator.ofFloat(
+                splashScreenProvider.view,
+                View.TRANSLATION_Y,
+                0f,
+                -splashScreenProvider.view.height.toFloat()
+            ).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+                doOnEnd {
+                    splashScreenProvider.remove()
+                }
+            }.start()
         }
     }
 }
