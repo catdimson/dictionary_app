@@ -13,7 +13,10 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryItemRecyclerViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryItemRecyclerViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): HistoryItemRecyclerViewHolder {
         return HistoryItemRecyclerViewHolder.create(parent)
     }
 

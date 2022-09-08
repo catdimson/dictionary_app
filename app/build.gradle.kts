@@ -28,7 +28,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -37,7 +40,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs.plus("-Xjvm-default=compatibility")
     }
     buildFeatures {
         viewBinding = true
@@ -83,7 +85,18 @@ dependencies {
     implementation(General.material)
     implementation(General.constraintlayout)
 
+    // Tests
+    implementation(Tests.coreTesting)
+    testImplementation(Tests.kotlinxCoroutinesTest)
+    testImplementation(Tests.kotlinxCoroutinesTestJvm)
+    testImplementation(Tests.mockitoCore)
+    testImplementation(Tests.mockitoInline)
+    testImplementation(Tests.mockitoKotlin)
     testImplementation(Tests.junit)
+    testImplementation(Tests.runner)
+    testImplementation("org.robolectric:robolectric:4.5.1")
+    testImplementation("androidx.test.ext:truth:1.3.0")
     androidTestImplementation(Tests.exJunit)
     androidTestImplementation(Tests.espressoCore)
+    androidTestImplementation(Tests.rules)
 }

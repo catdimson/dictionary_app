@@ -25,14 +25,24 @@ class HistoryViewModel(
     }
 
     private suspend fun startInteractor(word: String, isOnline: Boolean) {
-        liveData.postValue(parseLocalSearchResults(interactor.getData(word, isOnline)))
+        val returnAppState = interactor.getData(word, isOnline)
+        when (returnAppState) {
+            is AppState.Success -> {
+                liveData.postValue(parseLocalSearchResults(returnAppState))
+            }
+            is AppState.Error -> {
+                handleError(returnAppState.error)
+            }
+            else -> {}
+        }
     }
 
     override fun handleError(error: Throwable) {
         liveData.postValue(AppState.Error(error))
     }
 
-    override fun onCleared() {
+    // в учебных целях сделаем public
+    public override fun onCleared() {
         liveData.value = AppState.Success(null)
         super.onCleared()
     }

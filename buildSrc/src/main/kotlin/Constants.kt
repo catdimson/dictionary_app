@@ -23,7 +23,7 @@ private object DependenciesVersion {
     const val loggingInterceptor = "3.12.1"
 
     // Coroutines
-    const val kotlinxCoroutinesAndroid = "1.6.1"
+    const val kotlinxCoroutinesAndroid = "1.6.4"
 
     // Koin
     const val koinCore = "3.1.2"
@@ -51,8 +51,16 @@ private object DependenciesVersion {
 
     // Tests
     const val junit = "4.13.2"
-    const val exTjunit = "1.1.3"
+    const val exTjunit = "1.1.2"
     const val espressoCore = "3.4.0"
+    const val coreTesting = "2.1.0"
+    const val mockitoCore = "2.25.1"
+    const val mockitoInline = "2.13.0"
+    const val mockitoKotlin = "1.5.0"
+    const val rules = "1.4.0"
+    const val runner = "1.4.0"
+    const val kotlinxCoroutinesTest = "1.6.4"
+    const val kotlinxCoroutinesTestJvm = "1.6.4"
 }
 
 object Retrofit {
@@ -101,4 +109,12 @@ object Tests {
     const val junit = "junit:junit:${DependenciesVersion.junit}"
     const val exJunit = "androidx.test.ext:junit:${DependenciesVersion.exTjunit}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${DependenciesVersion.espressoCore}"
+    const val coreTesting = "androidx.arch.core:core-testing:${DependenciesVersion.coreTesting}"
+    const val mockitoCore = "org.mockito:mockito-core:${DependenciesVersion.mockitoCore}"
+    const val mockitoInline = "org.mockito:mockito-inline:${DependenciesVersion.mockitoInline}"
+    const val mockitoKotlin = "com.nhaarman:mockito-kotlin:${DependenciesVersion.mockitoKotlin}"
+    const val rules = "androidx.test:rules:${DependenciesVersion.rules}"
+    const val runner = "androidx.test:runner:${DependenciesVersion.runner}"
+    const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${DependenciesVersion.kotlinxCoroutinesTest}"
+    const val kotlinxCoroutinesTestJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm:${DependenciesVersion.kotlinxCoroutinesTestJvm}"
 }
