@@ -11,7 +11,7 @@ import coil.request.LoadRequest
 import coil.transform.CircleCropTransformation
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityDescriptionBinding
-import com.example.dictionaryapp.util.isOnline
+import com.example.utils.isOnline
 
 class DescriptionActivity : AppCompatActivity() {
 

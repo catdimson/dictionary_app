@@ -9,10 +9,10 @@ import com.example.dictionaryapp.databinding.LoadingLayoutBinding
 import com.example.dictionaryapp.model.data.AppState
 import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.datasource.Interactor
-import com.example.dictionaryapp.util.isOnline
 import com.example.dictionaryapp.viewmodel.BaseViewModel
+import com.example.utils.isOnline
 
-private const val DIALOG_FRAGMENT_TAG = "dialog_fragment_tag"
+private const val DIALOG_FRAGMENT_TAG = "DIALOG_FRAGMENT_TAG"
 
 abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity() {
 

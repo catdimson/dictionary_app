@@ -13,6 +13,7 @@ import com.example.dictionaryapp.model.repository.RepositoryLocal
 import com.example.dictionaryapp.model.repository.RepositoryLocalImpl
 import com.example.dictionaryapp.viewmodel.history.HistoryViewModel
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val appModule = module {
@@ -27,12 +28,16 @@ val appModule = module {
 }
 
 val mainScreen = module {
-    factory { MainViewModel(get()) }
-    factory { MainInteractor(get(), get()) }
+    scope(named("mainScope")) {
+        scoped { MainInteractor(get(), get()) }
+        factory { MainViewModel(get()) }
+    }
 }
 
 val historyScreen = module {
-    factory { HistoryViewModel(get()) }
-    factory { HistoryInteractor(get(), get()) }
+    scope(named("historyScope")) {
+        scoped { HistoryInteractor(get(), get()) }
+        factory { HistoryViewModel(get()) }
+    }
 }
 

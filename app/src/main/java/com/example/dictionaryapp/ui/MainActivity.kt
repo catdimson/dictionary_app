@@ -1,11 +1,18 @@
 package com.example.dictionaryapp.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.Observer
+import android.view.animation.AccelerateInterpolator
+import androidx.annotation.RequiresApi
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionaryapp.R
 import com.example.dictionaryapp.databinding.ActivityMainBinding
 import com.example.dictionaryapp.model.data.AppState
@@ -13,9 +20,13 @@ import com.example.dictionaryapp.model.data.entity.DataModel
 import com.example.dictionaryapp.model.datasource.MainInteractor
 import com.example.dictionaryapp.ui.recyclerview.main.MainAdapter
 import com.example.dictionaryapp.util.convertMeaningsToString
-import com.example.dictionaryapp.util.isOnline
 import com.example.dictionaryapp.viewmodel.main.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.utils.isOnline
+import com.example.utils.viewById
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.koin.android.ext.android.getKoin
+import org.koin.core.qualifier.named
+import java.util.concurrent.Executors
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "BOTTOM_SHEET_FRAGMENT_DIALOG_TAG"
 
@@ -23,7 +34,11 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
+    private lateinit var splashScreen: SplashScreen
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
+    private val scope by lazy { getKoin().getOrCreateScope("mainScope", named("mainScope")) }
+    private val mainActivityRecyclerview by viewById<RecyclerView>(R.id.main_activity_recyclerview)
+    private val searchFAB by viewById<FloatingActionButton>(R.id.search_fab)
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -55,10 +70,17 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
             }
         }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        stopSplashScreen()
+        customizeSplashScreen()
 
         iniViewModel()
         initViews()
@@ -87,13 +109,50 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         if (binding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: MainViewModel by viewModel()
+        val viewModel = scope.get<MainViewModel>()
         model = viewModel
-        model.subscribe().observe(this@MainActivity, Observer<AppState> { renderData(it) })
+        model.subscribe().observe(this@MainActivity, { renderData(it) })
     }
 
     private fun initViews() {
-        binding.searchFab.setOnClickListener(fabClickListener)
-        binding.mainActivityRecyclerview.adapter = adapter
+        searchFAB.setOnClickListener(fabClickListener)
+        mainActivityRecyclerview.adapter = adapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.close()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun runSplashScreen() {
+        splashScreen = installSplashScreen()
+        splashScreen.setKeepVisibleCondition { true }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun stopSplashScreen() {
+        Executors.newSingleThreadExecutor().execute {
+            Thread.sleep(2_000)
+            splashScreen.setKeepVisibleCondition { false }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun customizeSplashScreen() {
+        splashScreen.setOnExitAnimationListener { splashScreenProvider ->
+            ObjectAnimator.ofFloat(
+                splashScreenProvider.view,
+                View.TRANSLATION_Y,
+                0f,
+                -splashScreenProvider.view.height.toFloat()
+            ).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+                doOnEnd {
+                    splashScreenProvider.remove()
+                }
+            }.start()
+        }
     }
 }

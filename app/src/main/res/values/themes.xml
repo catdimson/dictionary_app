@@ -37,4 +37,6 @@
     <style name="AppModalStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="android:background">@drawable/ic_launcher_background</item>
     </style>
+
+    <style name="Theme.SplashTheme" parent="Theme.DictionaryApp" />
 </resources>
